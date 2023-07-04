@@ -1,6 +1,17 @@
 from fastapi import FastAPI
 
+from pydantic import BaseModel
+
 app = FastAPI()
+
+class Alumno(BaseModel):
+    matricula:str
+    nombre:str
+    apellidos:str
+    promedio:float
+    cuatrimestre:int
+
+
 
 
 @app.get("/")
@@ -11,7 +22,8 @@ def saludar():
     return response
 
 @app.post("/")
-def insertAny() :
+def insertAny(alumno:Alumno):
+    print(dict(alumno))
     response={
         "status":"Peticion por post recibida..."
     }
